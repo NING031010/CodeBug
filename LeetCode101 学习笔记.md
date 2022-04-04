@@ -402,7 +402,8 @@ int* partitionLabels(char* s, int* returnSize)//注意：第二个参数是返�
 贪心代码样例：
 
 ```C
-int maxProfit(int* prices, int pricesSize){
+int maxProfit(int* prices, int pricesSize)
+{
 	int profit = 0;
     for(int i = 1; i < pricesSize; i++)
     {
@@ -420,7 +421,8 @@ dp[i] [0] = Max{dp[i - 1] [0]，dp[i - 1] [1] + price[i]}
 dp[i] [1] = Max{dp[i - 1] [1]，dp[i] [0] - price[i]}
 
 ```C
-int maxProfit(int* prices, int pricesSize){
+int maxProfit(int* prices, int pricesSize)
+{
 	int dp[30000][2] = {0};
     dp[0][0] = 0, dp[0][1] = -prices[0];
     for(int i = 1; i < pricesSize; i++)
@@ -473,10 +475,13 @@ int** reconstructQueue(int** people, int peopleSize, int* peopleColSize, int* re
     int** ans = (int**)calloc(peopleSize, sizeof(int*));//重组后的队列
     *returnSize = peopleSize;//返回数组的行数
     *returnColumnSizes = (int*)calloc(peopleSize, sizeof(int));//返回数组一行的元素个数
-    for (int i = 0; i < peopleSize; i++) {
+    for (int i = 0; i < peopleSize; i++) 
+    {
         int spaces = people[i][1] + 1;//需要放置在第spaces个空位置
-        for (int j = 0; j < peopleSize; j++) {
-            if ((*returnColumnSizes)[j] == 0) {
+        for (int j = 0; j < peopleSize; j++) 
+        {
+            if ((*returnColumnSizes)[j] == 0) 
+            {
                 spaces--;
                 if (!spaces) {//放置并标记该位置为非空
                     (*returnColumnSizes)[j] = 2;
@@ -532,7 +537,8 @@ int** reconstructQueue(int** people, int peopleSize, int* peopleColSize, int* re
 代码样例：
 
 ```C
-bool checkPossibility(int* nums, int numsSize){
+bool checkPossibility(int* nums, int numsSize)
+{
 	int count = 0;	//用count记录修改次数判断能否
     for (int i = 1; i < numsSize; i++) 
     {
@@ -553,13 +559,228 @@ bool checkPossibility(int* nums, int numsSize){
 
 #### 二，双指针
 
+双指针主要用于遍历数组，两个指针指向不同的元素，从而协同完成任务。也可以延伸到多 个数组的多个指针。若两个指针指向同一数组，遍历方向相同且不会相交，则也称为滑动窗口（两个指针包围的区域即为当前的窗口），经常用于区间搜索。 若两个指针指向同一数组，但是遍历方向相反，则可以用来进行搜索，待搜索的数组往往是排好序的。
+
+常见指针的定义如下：
+
+> int x; 
+> int * p1 = &x; // 指针可以被修改，值也可以被修改 
+> const int * p2 = &x; // 指针可以被修改，值不可以被修改（const int） 
+> int * const p3 = &x; // 指针不可以被修改（* const），值可以被修改 
+> const int * const p4 = &x; // 指针不可以被修改，值也不可以被修改
+>
+> int* func(int x, int y);	//返回值为指针的函数
+> int ( *fun)(int x, int y);	//指向函数的指针	fun = function或者fun = &function(赋值)		x = fun()或x = ( *fun)();(使用)
+>
+> int *arr[N];	//元素为指针的数组
+> int ( *arr)[N];	//指向数组的指针（类似二维数组）
 
 
 
+#### 1.Two Sum:
+
+- **Two Sum II - Input Array Is Sorted**
+
+**题目描述：**
+
+在一个增序的整数数组里找到两个数（不能重复），使它们的和为给定值。已知有且只有一对解。
+
+**输入输出样例：**
+
+> Input: numbers = [2,7,11,15], target = 9
+> Output: [1,2]
+> Explanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].
+
+**题解：**
+
+见到数组先排序，因为数组已经排好序，我们可以采用方向相反的双指针来寻找这两个数字，一个初始指向最小的元素，即数组最左边，向右遍历；一个初始指向最大的元素，即数组最右边，向左遍历。如果两个指针指向元素的和等于给定值，那么它们就是我们要的结果。如果两个指针指向元素的和小于给定值，我们把左边的指针右移一位，使得当前的和增加一点。如果两个指针指向元素的和大于给定值，我们把右边的指针左移一位，使得当前的和减少一点。
+
+代码样例：
+
+```C
+int* twoSum(int* numbers, int numbersSize, int target, int* returnSize)
+{
+	int l = 0, r = numbersSize - 1;	//初始位置
+    int sum = 0;	//记录和
+    while (l < r) //移动指针
+    {
+        sum = numbers[l] + numbers[r];
+        if (sum == target)	break;
+        if (sum < target)	l++;
+        else	r--;
+    }
+    *returnSize = 2;
+    int* ans = (int*)calloc(2, sizeof(int));
+    ans[0] = l + 1;		ans[1] = r + 1;
+    return ans;
+}
+```
 
 
 
+#### 2.归并有序数组：
 
+- **Merge Sorted Array**
+
+**题目描述：**
+
+给定两个有序增数组，把两个数组合并为一个有序增数组，数组一长度为两数组实际长度之和，结果存储在数组一中。
+
+**输入输出样例：**
+
+> Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+> Output: [1,2,2,3,5,6]
+> Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+> The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+
+**题解：**
+
+因为数组一后面是空的，所以先放大的，两个指针分别在数组一二的末尾，选择较大的那个插入，较大的那个指针向前移动，要插入的位置向前移动，其实就是所有元素一个一个比较，谁大谁放后面。
+
+代码示例：
+
+```C
+void merge(int* nums1, int nums1Size, int m, int* nums2, int nums2Size, int n)
+{
+	int pos = m-- + n-- - 1;	
+    while (m >= 0 && n >= 0)	//直接用m和n，效率高
+        nums1[pos--] = nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
+    while (n >= 0)	//把2剩下的贴进1
+        nums1[pos--] = nums2[n--];
+}
+```
+
+
+
+#### 3.快慢指针：
+
+-  **Linked List Cycle II**
+
+**题目描述：**
+
+给定一个链表，如果有环路，找出环路的开始点。
+
+如果没有特殊说明，LeetCode 采用如下的数据结构表示链表。
+
+> struct ListNode {
+> int val;
+> ListNode *next;
+> };
+
+**输入输出样例：**
+
+> Input: head = [3,2,0,-4], pos = 1
+> Output: tail connects to node index 1
+> Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+**题解：**
+
+对于链表找环路的问题，有一个通用的解法——快慢指针（Floyd 判圈法）。
+给定两个指针，分别命名为 slow 和 fast，起始位置在链表的开头。每次 fast 前进两步，slow 前进一步。如果 fast可以走到尽头，那么说明没有环路；如果 fast 可以无限走下去，那么说明一定有环路，且一定存在一个时刻 slow 和 fast 相遇。当 slow 和 fast 第一次相遇时，我们将 fast 重新移动到链表开头，并让 slow 和 fast 每次都前进一步。当 slow 和 fast 第二次相遇时，相遇的节点即为环路的开始点。
+
+代码示例：
+
+```C
+struct ListNode *detectCycle(struct ListNode *head) 
+{
+    struct ListNode *slow = head, *fast = head;
+	// 判断是否存在环路
+	do {
+		if (!fast || !fast->next) //fast能走到头，没有环路
+            return NULL;
+		fast = fast->next->next;
+		slow = slow->next;
+	} while (fast != slow);
+	// 如果存在，查找环路节点
+	fast = head;
+	while (fast != slow)
+    {
+	slow = slow->next;
+	fast = fast->next;
+	}
+	return fast;
+}
+```
+
+
+
+#### 4.滑动窗口：
+
+- **Minimum Window Substring**
+
+**题目描述：**
+
+给定两个字符串 S 和 T，求 S 中包含 T 所有字符的最短连续子字符串的长度，同时要求时间复杂度不得超过 O(n)。
+
+**输入输出样例：**
+
+> Input: S = "ADOBECODEBANC", T = "ABC" 
+> Output: "BANC"
+
+**题解：**
+
+滑动窗口本质就是对暴力解法的两层for循环的优化，也即动态调整内外层的for循环，第一层是left，第二层是right，从逻辑上剪枝去掉多余冗余的判断。
+
+具体思路：
+
+- 找可行解。从0开始匹配，开启窗口，右边界扩大至满足条件，则此时再往后扩不符合最小子串
+- 找最优解。再缩左边界，找到最小子串，然后滑窗。也就是当前从左到右可行解里已找到最优解，那么这段区间后面就没必要再找。
+- 滑动窗口。把左边界右移，继续往后滑动，重复右边界扩大至满足条件找新的一个区间
+- 终止条件。直到右边界找到末尾停止，返回最小的区间范围
+
+代码样例：
+
+```C
+#define MAX_LEN 128
+char* minWindow(char * s, char * t) {
+    int hashNeed[MAX_LEN] = {0}, hashWindow[MAX_LEN] = {0};
+    int start = 0, end = 0;
+    int minStart = 0, minLen = INT_MAX;
+    int lenS = strlen(s);
+    int lenT = 0, valid = 0;
+    for (int i = 0; t[i]; i++) {	//存储要找的字符信息
+        hashNeed[t[i]]++;
+    }
+    for (int i = 0; i < MAX_LEN; i++) {		//t中不重复的字符个数
+        if (hashNeed[i] != 0) 	lenT++;
+    }
+    // 记录最小覆盖子串的起始索引及长度
+    while (end < lenS) {
+        char c = s[end];	// c 是将移入窗口的字符
+        end++;	// 右移窗口
+        // 进行窗口内数据的一系列更新
+        if (hashNeed[c]) {
+            hashWindow[c]++;
+            if (hashWindow[c] == hashNeed[c])
+                valid++;	//某个字符已找全
+        }
+        // 判断左侧窗口是否要收缩
+        while (valid == lenT) {
+            // 在这里更新最小覆盖子串
+            if (end - start < minLen) {
+                minStart = start;
+                minLen = end - start;
+            }
+            char d = s[start];	// d 是将移出窗口的字符
+            start++;	// 左移窗口
+            if (hashNeed[d]) {
+                if (hashWindow[d] == hashNeed[d])
+                    valid--;
+                 hashWindow[d]--;
+            }
+        }
+    }
+    if (minLen == INT_MAX) 	return "";
+    s[minStart + minLen] = '\0'; //切掉后面的
+    return &s[minStart];	//切掉前面的
+}
+```
+
+
+
+#### 5.练习：
+
+- 
 
 
 
