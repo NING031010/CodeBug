@@ -70,8 +70,8 @@ int assigncookies(int *children, int chilen, int *cookies, int coolen)
     while(child < chilen && cook < coolen)//从最小饥饿度的孩子开始分配
     {
         if(children[child] <= cookies[cook])
-            ++child;
-        ++cook;//从小到大遍历饼干至满足孩子
+            child++;
+        cook++;//从小到大遍历饼干至满足孩子
     }
     return child;
 }
@@ -158,9 +158,9 @@ int candy(int *rating, int len)
 ```C
 void sort(int *a, int alen)
 {
-    for (int i=0; i<n-1; ++i)  //比较n-1轮
+    for (int i=0; i<n-1; i++)  //比较n-1轮
     {
-        for (int j=0; j<n-1-i; ++j)  //每轮比较n-1-i次,
+        for (int j=0; j<n-1-i; j++)  //每轮比较n-1-i次,
         {
             if (a[j] < a[j+1])
             {
@@ -212,7 +212,7 @@ int eraseOverlapIntervals(int **intervals, int alen, int *blen)
     for (int i = 1; i < alen; ++i)
     {
         if (intervals[i][0] < prev) //区间重叠判断
-            ++removed;
+            removed++;
         else
             prev = intervals[i][1]; //扩展保留区间大小
     }
@@ -325,7 +325,7 @@ int findMinArrowShots(int** intervals, int alen, int* pointsColSize)
     for (int i = 1; i < alen; ++i)
     {
         if (intervals[i][0] <= prev) //区间重叠判断,本题中边界算作重叠
-            ++removed;
+            removed++;
         else
             prev = intervals[i][1];
     }
