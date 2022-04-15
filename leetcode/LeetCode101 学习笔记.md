@@ -1,6 +1,6 @@
 ## LeetCode101 学习笔记
 
-#### 一，贪心算法
+### 一、贪心算法
 
 局部最优相互独立，全局最优为局部最优的简单求和。
 
@@ -576,7 +576,7 @@ bool checkPossibility(int* nums, int numsSize)
 
 
 
-#### 二，双指针
+### 二、双指针
 
 双指针主要用于遍历数组，两个指针指向不同的元素，从而协同完成任务。也可以延伸到多 个数组的多个指针。若两个指针指向同一数组，遍历方向相同且不会相交，则也称为滑动窗口（两个指针包围的区域即为当前的窗口），经常用于区间搜索。 若两个指针指向同一数组，但是遍历方向相反，则可以用来进行搜索，待搜索的数组往往是排好序的。
 
@@ -809,25 +809,210 @@ char* minWindow(char * s, char * t) {
 
 #### 5.练习：
 
-- 
+- **Sum of Square Numbers**
+
+**题目描述：**
+
+给定一个非负整数c，判断他是否是平方数，即是否存在整数a和b，使得a^2^+b^2^=c;
+
+**输入输出样例：**
+
+```
+Input: c = 5
+Output: true
+Explanation: 1 * 1 + 2 * 2 = 5
+```
+
+**题解：**
+
+双指针，一个指向0，另一个指向根号n取整，左指针向右移或者右指针向左移，就可以避免双重循环解决问题。
+
+代码样例：
+
+```c
+bool judgeSquareSum(int c){
+    long long left = 0, right = (long long)sqrt(c);
+    while(1)
+    {
+        if (left > right)
+            return false;
+        long long ans = left * left + right * right;
+        if (ans == c)
+            return true;
+        if (ans < c)
+            left++;
+        else	right--;   
+    }
+}
+```
 
 
 
+- **Valid Palindrome II**
+
+**题目描述：**
+
+给定一个字符串，判断其能否在至多去掉一个字符的限制条件下构成回文字符串（正反读一样）
+
+**输入输出样例：**
+
+```
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+```
+
+**题解：**
+
+双指针，一个从前向后走，另一个从后向前走，如果发现不一样的，比较前面的指针的后一个和后一个指针，或者后一个指针的前一个与前一个指针，然后判断该让哪个停一下，并记录删除一次，下次再有不同则退出。
+
+代码样例：
+
+```c
+bool isPalindrome(char* s, int start, int end)
+{
+    while(start < end)
+    {
+        if(s[start] == s[end]){
+            start++;
+            end--;
+        }
+        else return false;
+    }
+    return true;
+}
+bool validPalindrome(char * s){
+    int start = 0, end = strlen(s) - 1;
+    while(start < end)
+    {
+        if(s[start] == s[end]){
+            start++;
+            end--;
+        }
+        //注意：出现不同时去掉高位的和去掉低位的只要有一个符合即可
+        else if(isPalindrome(s, start+1, end) || isPalindrome(s, start, end-1)) return true;
+        else return false;
+    }
+    return true;
+}
+```
 
 
 
+- **Longest Word in Dictionary through Deleting**
+
+**题目描述：**
+
+给定一个字符串，和一个二维字符数组（字典）存放着几个单词，要求输出能通过删除字符串里的元素得到的最长单词，如果最大长度的有多个，则输出字典序更小的单词，如果不存在，输出空字符串。
+
+**输入输出样例：**
+
+```
+Input: s = "abpcplea", dictionary = ["ale","apple","monkey","plea"]
+Output: "apple"
+```
+
+**题解：**
+
+```C
+char * findLongestWord(char * s, char ** d, int dSize) 
+{
+	char * longestword = "";          
+	int longwolen = -1;               
+	for (int i = 0; i < dSize; i++) 
+    {  
+		char * p = d[i];              
+		int j = 0, k = 0;              
+		while (s[j] != '\0' && p[k] != '\0') 
+        {
+			if (s[j] == p[k])
+				k++;
+            j++;
+		}
+		if (p[k] == '\0') 
+        { 
+			if (k > longwolen) 
+            { 
+				longwolen = k;   
+				longestword = p; 
+			}
+			else if (k == longwolen) 
+            { 
+				if (strcmp(p, longestword) < 0) 
+					longestword = p;  
+			}
+		}
+	}
+	return longestword;
+}
+```
 
 
 
+### 三、二分查找
+
+每次查找时通过将待查找区间分成两部分并只取 一部分继续查找，将查找的复杂度大大减少。对于一个长度为 O(n) 的数组，二分查找的时间复杂度为 O(log n)。
+
+具体到代码上，二分查找时区间的左右端取开区间还是闭区间在绝大多数时候都可以，因此有些初学者会容易搞不清楚如何定义区间开闭性。这里我提供两个小诀窍，第一是尝试熟练使用一种写法，比如左闭右开（满足 C++、Python 等语言的习惯）或左闭右闭（便于处理边界条件）；第二是在刷题时思考如果最后区间只剩下一个数或者两个数，自己的写法是否会陷入死循环，如果某种写法无法跳出死循环，则考虑尝试另一种写法。 二分查找也可以看作双指针的一种特殊情况，但我们一般会将二者区分。双指针类型的题， 指针通常是一步一步移动的，而在二分查找里，指针每次移动半个区间长度。
+
+#### 1.求开方：
+
+- **Sqrt(x)**
+
+**题目描述：**
+
+给定一个非负整数，求它的开方，向下取整。
+
+**输入输出样例：**
+
+```
+Input: x = 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since the decimal part is truncated, 2 is returned.
+```
+
+**题解：**
+
+区间为[0, x]；取中点，根据中点的情况判断向左或向右，注意：取中点时为了防止（a+b)/2溢出，改写为更稳妥的a+(b-a)/2;
+
+代码样例：
+
+```c
+int mySqrt(int a) 
+{
+    if (a == 0) 
+        return a;
+    int l = 1, r = a, mid, sqrt;
+    while (l <= r) 
+    {
+    	mid = l + (r - l) / 2;
+    	sqrt = a / mid;
+    	if (sqrt == mid) 
+    		return mid;
+    	else if (mid > sqrt)
+    		r = mid - 1;
+		else
+    		l = mid + 1;
+    }
+    return r;
+}
+```
+
+还有更简洁的牛顿迭代法：
+
+```C
+int mySqrt(int a) 
+{
+	long x = a;	//防越界
+	while (x * x > a)
+		x = (x + a / x) / 2;
+	return x;
+}
+```
 
 
 
-
-
-
-
-
-
+#### 2.查找区间：
 
 
 
