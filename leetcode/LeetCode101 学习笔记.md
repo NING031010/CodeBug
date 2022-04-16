@@ -1012,7 +1012,137 @@ int mySqrt(int a)
 
 
 
-#### 2.查找区间：
+#### 2.查找区间
+
+- **Find First and Last Position of Element in Sorted Array**
+
+**题目描述：**
+
+给定一个增序的整数数组和一个值，查找该值第一次和最后一次出现的位置（从0开始），如果不存在该值，则两个返回值都设为-1
+
+**输入输出样例：**
+
+```
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+```
+
+**题解：**
+
+用两个二分查找函数实现，一个找左边界，另一个找右边界（不会超时）
+
+代码样例：(左闭右闭)
+
+```C
+int left_bound(int* nums, int numsSize, int target) 
+{
+    int l = 0, r = numsSize - 1;
+    while (l <= r) 
+    {
+        int mid = l + (r - l) / 2;
+        if (nums[mid] < target)
+            l = mid + 1;
+        else
+            r = mid - 1;
+    }
+    // 最后要检查 left 越界的情况
+    if (l >= numsSize || nums[l] != target)
+        return -1;
+    return l;
+}
+int right_bound(int* nums, int numsSize, int target) 
+{
+    int l = 0, r = numsSize - 1;
+    while (l <= r) 
+    {
+        int mid = l + (r - l) / 2;
+        if (nums[mid] > target)
+            r = mid - 1;
+        else
+            l = mid + 1;
+    }
+    // 最后要检查 right 越界的情况
+    if (r < 0 || nums[r] != target)
+        return -1;
+    return r;
+}
+int* searchRange(int* nums, int numsSize, int target, int* returnSize){
+	int *ans = (int*)calloc(2, sizeof(int));
+    *returnSize = 2;
+    ans[0] = left_bound(nums, numsSize, target);
+    ans[1] = right_bound(nums, numsSize, target);
+    return ans;
+}
+```
+
+（左闭右开）
+
+主循环判断本质目的是为了确保整个区间能够被检索到。
+
+每次循环的区间都是[left, right)，在二分的时候，搜索区间去掉mid使得原始区间分为两块[left, mid), [mid+1, right)，这样才能保证整个区间都被检索。所以left = mid + 1和right = mid
+
+主循环判断条件：left < right，这和我们在其他循环中是一样的。比如for (int i = 0; i < nums.size(); ++i)
+左闭右开的写法更常见，c++中迭代器返回的end就是右开的。
+在主循环跳出的时候，其实是[left, left)，这个搜索空间为空，主循环确保了整个区间的检索。
+
+```C
+int left_bound(int* nums, int numsSize, int target) 
+{
+    int l = 0, r = numsSize;
+    while (l < r) 
+    {
+        int mid = l + (r - l) / 2;
+        if (nums[mid] < target)
+            l = mid + 1;
+        else
+            r = mid;
+    }
+    // 最后要检查 left 越界的情况
+    if (l >= numsSize || nums[l] != target)
+        return -1;
+    return l;
+}
+int right_bound(int* nums, int numsSize, int target) 
+{
+    int l = 0, r = numsSize;
+    while (l < r) 
+    {
+        int mid = l + (r - l) / 2;
+        if (nums[mid] > target)
+            r = mid;
+        else
+            l = mid + 1;
+    }
+    // 最后要检查越界的情况
+    if (l <= 0 || nums[l - 1] != target)
+        return -1;
+    return l - 1;
+}
+int* searchRange(int* nums, int numsSize, int target, int* returnSize){
+	int *ans = (int*)calloc(2, sizeof(int));
+    *returnSize = 2;
+    ans[0] = left_bound(nums, numsSize, target);
+    ans[1] = right_bound(nums, numsSize, target);
+    return ans;
+}
+```
 
 
+
+#### 3.旋转数组查找数字
+
+- **Search in Rotated Sorted Array II**
+
+**题目描述：**
+
+一个原本增序的数组被首尾相连后按某个位置断开（如 [1,2,2,3,4,5] → [2,3,4,5,1,2]，在第一 位和第二位断开），我们称其为旋转数组。给定一个值，判断这个值是否存在于这个旋转数组中。
+
+**输入输出样例：**
+
+```
+Input: nums = [2,5,6,0,0,1,2], target = 0
+Output: true
+```
+
+**题解：**
 
