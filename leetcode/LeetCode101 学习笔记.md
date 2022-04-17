@@ -1146,3 +1146,37 @@ Output: true
 
 **题解：**
 
+即使数组被旋转过，我们仍然可以利用这个数组的递增性，使用二分查找。对于当前的中点， 如果它指向的值小于等于右端，那么说明右区间是排好序的；反之，那么说明左区间是排好序的。 如果目标值位于排好序的区间内，我们可以对这个区间继续二分查找；反之，我们对于另一半区间继续二分查找。
+
+注意，因为数组存在重复数字，如果中点和左端的数字相同，我们并不能确定是左区间全部相同，还是右区间完全相同。在这种情况下，我们可以简单地将左端点右移一位，然后继续进行二分查找。
+
+代码样例：（左闭右闭）
+
+```C
+bool search(int* nums, int numsSize, int target){
+	int l = 0, r = numsSize - 1, mid;
+    while (l <= r)
+    {
+        mid = l + (r - l) / 2;
+        if (nums[mid] == target)
+            return true;
+        if (nums[l] == nums[mid])// 无法判断哪个区间是增序的
+			l++;
+		else if (nums[mid] <= nums[r])// 右区间是增序的
+        {
+            if (target > nums[mid] && target <= nums[r])
+				l = mid + 1;
+			else
+				r = mid - 1;
+        }
+		else// 左区间是增序的
+        {
+            if (target >= nums[l] && target < nums[mid])
+				r = mid - 1;
+			else
+				l = mid + 1;
+        }
+    }
+	return false;
+}
+```
