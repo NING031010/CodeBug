@@ -285,11 +285,12 @@ ol:last-child {
     margin-bottom: 0;
 }
 blockquote {
-    /* border-left: 4px solid #dfe2e5; */
-    border-left: 4px solid #73e68c;
+    border: 1px solid #dfe2e5;
+    border-color: #73e68c;
+    border-radius: 2px;
     padding: 0 15px;
     /* color: #777777; */
-    background-color: #f7f7f7;
+    background-color: #f8f8f8;
 }
 blockquote blockquote {
     padding-right: 0;
@@ -305,7 +306,7 @@ table tr {
 }
 table tr:nth-child(2n),
 thead {
-    background-color: #f8f8f8;
+    background-color: #f9f9f9;
 }
 table th {
     font-weight: bold;
