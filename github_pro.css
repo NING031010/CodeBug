@@ -241,6 +241,7 @@ h4 {
     font-size: 1.25em;
 }
 h5 {
+    font-family: Consolas, "微软雅黑", monospace;
     font-size: 1em;
 }
 h6 {
@@ -285,12 +286,10 @@ ol:last-child {
     margin-bottom: 0;
 }
 blockquote {
-    border: 1px solid #dfe2e5;
-    border-color: #73e68c;
+    border-left: 3px solid #40e0d0;
     border-radius: 2px;
     padding: 0 15px;
-    /* color: #777777; */
-    background-color: #f8f8f8;
+    font-size: 0.9rem;
 }
 blockquote blockquote {
     padding-right: 0;
@@ -348,7 +347,7 @@ tt {
     border-radius: 3px;
     padding: 0;
     padding: 2px 4px 0px 4px;
-    font-size: 0.9em;
+    font-size: 0.9rem;
 }
 
 code {
