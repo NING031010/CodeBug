@@ -26,11 +26,7 @@
 
 **使用方法：**保证每一步都是局部最优的，最后得到的结果即为全局最优结果
 
-举一个最简单的例子：小明和小王喜欢吃苹果，小明可以吃五个，小王可以吃三个。已知苹
-果园里有吃不完的苹果，求小明和小王一共最多吃多少个苹果。在这个例子中，我们可以选用的
-贪心策略为，每个人吃自己能吃的最多数量的苹果，这在每个人身上都是局部最优的。又因为全
-局结果是局部结果的简单求和，且局部结果互不相干，因此局部最优的策略也同样是全局最优的
-策略。
+举一个最简单的例子：小明和小王喜欢吃苹果，小明可以吃五个，小王可以吃三个。已知苹果园里有吃不完的苹果，求小明和小王一共最多吃多少个苹果。在这个例子中，我们可以选用的贪心策略为，每个人吃自己能吃的最多数量的苹果，这在每个人身上都是局部最优的。又因为全局结果是局部结果的简单求和，且局部结果互不相干，因此局部最优的策略也同样是全局最优的策略。
 
 ### 分配问题
 
@@ -670,7 +666,7 @@ struct ListNode {
 
 **题解：**
 
-对于链表找环路的问题，有一个通用的解法——**快慢指针（Floyd 判圈法）**。给定两个指针，分别命名为 slow 和 fast，起始位置在链表的开头。每次 fast 前进两步，slow 前进一步。如果 fast 可以走到尽头，那么说明没有环路；如果 fast 可以无限走下去，那么说明一定有环路，且一定存在一个时刻 slow 和 fast 相遇。当 slow 和 fast 第一次相遇时，我们将 fast 重新移动到链表开头，并让 slow 和 fast 每次都前进一步。当 slow 和 fast 第二次相遇时，相遇的节点即为环路的开始点。
+对于链表找环路的问题，有一个通用的解法——==快慢指针（Floyd 判圈法）==。给定两个指针，分别命名为 slow 和 fast，起始位置在链表的开头。每次 fast 前进两步，slow 前进一步。如果 fast 可以走到尽头，那么说明没有环路；如果 fast 可以无限走下去，那么说明一定有环路，且一定存在一个时刻 slow 和 fast 相遇。当 slow 和 fast 第一次相遇时，我们将 fast 重新移动到链表开头，并让 slow 和 fast 每次都前进一步。当 slow 和 fast 第二次相遇时，相遇的节点即为环路的开始点。
 
 **代码：**
 
@@ -1835,9 +1831,184 @@ int dfs(vector<vector<int>>& grid, int r, int c) {
 
 **题目描述：**
 
+有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。省份是一组直接或间接相连的城市，组内不含其他没有相连的城市。
 
+给你一个 n x n 的矩阵 isConnected ，其中 isConnected\[i\]\[j\] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected\[i\]\[j\] = 0 表示二者不直接相连。
+
+返回矩阵中省份的数量。
+
+**测试样例：**
+
+示例 1：
+
+> 输入：isConnected = 
+> [[1,1,0],
+> [1,1,0],
+> [0,0,1]]
+> 输出：2
+
+示例 2：
+
+> 输入：isConnected = 
+> [[1,0,0],
+> [0,1,0],
+> [0,0,1]]
+> 输出：3
+
+**题解：**
+
+实际上与上一题是一样的，上题中矩阵每个元素都可看做一个结点，上下左右相邻即有关系；本题中每一行或列为一个结点，元素为 1 即有关系。这里我们采用第一种递归写法。
+
+**代码：**
+
+```cpp
+// 主函数
+int findCircleNum(vector<vector<int>>& friends) {
+    int n = friends.size(), count = 0;
+    vector<bool> visited(n, false);
+    for (int i = 0; i < n; i++) {
+        if (!visited[i]) {
+            dfs(friends, i, visited);
+            count++;
+        }
+    }
+    return count;
+}
+// 辅函数
+void dfs(vector<vector<int>>& friends, int i, vector<bool>& visited) {
+    visited[i] = true;
+    for (int k = 0; k < friends.size(); k++) {
+        if (friends[i][k] == 1 && !visited[k])
+            dfs(friends, k, visited);
+    }
+}
+```
+
+#### [太平洋大西洋水流问题](https://leetcode.cn/problems/pacific-atlantic-water-flow/)
+
+**题目描述：**
+
+有一个 m × n 的矩形岛屿，与太平洋和大西洋相邻。“太平洋”处于大陆的左边界和上边界，而“大西洋”处于大陆的右边界和下边界。
+
+这个岛被分割成一个由若干方形单元格组成的网格。给定一个 m x n 的整数矩阵 heights，heights\[r\]\[c\] 表示坐标 (r, c) 上单元格高于海平面的高度。
+
+岛上雨水较多，如果相邻单元格的高度小于或等于当前单元格的高度，雨水可以直接向北、南、东、西流向相邻单元格。水可以从海洋附近的任何单元格流入海洋。
+
+返回网格坐标 result 的 2D 列表 ，其中 result[i] = [ri, ci] 表示雨水从单元格 (ri, ci) 流动既可流向太平洋也可流向大西洋。
+
+**测试样例：**
+
+示例 1：
+
+> 输入: heights = 
+> [[1,2,2,3,5],
+> [3,2,3,4,4],
+> [2,4,5,3,1],
+> [6,7,1,4,5],
+> [5,1,1,2,4]]
+> 输出: [[0,4],[1,3],[1,4],[2,2],[3,0],[3,1],[4,0]]
+
+示例 2：
+
+> 输入: heights = 
+> [[2,1],
+> [1,2]]
+> 输出: [[0,0],[0,1],[1,0],[1,1]]
+
+**题解：**
+
+虽然题目要求的是满足向下流能到达两个大洋的位置，如果我们对所有的位置进行搜索，那么在不剪枝的情况下复杂度会很高。因此我们可以反过来想，从两个大洋开始向上流，这样我们只需要对矩形四条边进行搜索。搜索完成后，只需遍历一遍矩阵，满足条件的位置即为两个大洋向上流都能到达的位置。
+
+**代码：**
+
+```cpp
+vector<int> direction{-1, 0, 1, 0, -1};
+// 主函数
+vector<vector<int>> pacificAtlantic(vector<vector<int>>& matrix) {
+    if (matrix.empty() || matrix[0].empty())
+        return {};
+    vector<vector<int>> ans;
+    int m = matrix.size(), n = matrix[0].size();
+    vector<vector<bool>> can_reach_p(m, vector<bool>(n, false));
+    vector<vector<bool>> can_reach_a(m, vector<bool>(n, false));
+    for (int i = 0; i < m; i++) {
+        dfs(matrix, can_reach_p, i, 0);
+        dfs(matrix, can_reach_a, i, n - 1);
+    }
+    for (int i = 0; i < n; i++) {
+        dfs(matrix, can_reach_p, 0, i);
+        dfs(matrix, can_reach_a, m - 1, i);
+    }
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if (can_reach_p[i][j] && can_reach_a[i][j])
+                ans.push_back(vector<int>{i, j});
+        }
+    }
+    return ans;
+}
+// 辅函数
+void dfs(const vector<vector<int>>& matrix, vector<vector<bool>>& can_reach,
+         int r, int c) {
+    if (can_reach[r][c])
+        return;
+    can_reach[r][c] = true;
+    int x, y;
+    for (int i = 0; i < 4; i++) {
+        x = r + direction[i];
+        y = c + direction[i+1];
+        if (x >= 0 && x < matrix.size() 
+            && y >= 0 && y < matrix[0].size() && matrix[r][c] <= matrix[x][y])
+            dfs(matrix, can_reach, x, y);
+    }
+}
+```
 
 ### 回溯法
+
+回溯法（backtracking）是优先搜索的一种特殊情况，又称为试探法，常用于需要记录节点状态的深度优先搜索。通常来说，排列、组合、选择类问题使用回溯法比较方便。
+
+顾名思义，回溯法的核心是回溯。在搜索到某一节点的时候，如果我们发现目前的节点（及其子节点）并不是需求目标时，我们回退到原来的节点继续搜索，并且把在目前节点修改的状态还原。这样的好处是我们可以始终只对图的总状态进行修改，而非每次遍历时新建一个图来储存状态。在具体的写法上，它与普通的深度优先搜索一样，都有 [修改当前节点状态]→[递归子节点]的步骤，只是多了回溯的步骤，变成[修改当前节点状态]→[递归子节点]→[回改当前节点状态]。
+
+两个小诀窍，一是按引用传状态，二是所有的状态修改在递归完成后回改。
+
+回溯法修改一般有两种情况，一种是修改最后一位输出，比如排列组合；一种是修改访问标
+记，比如矩阵里搜字符串。
+
+#### [全排列](https://leetcode.cn/problems/permutations/)
+
+**题目描述：**
+
+给定一个不含重复数字的数组 nums ，返回其所有可能的全排列。你可以按任意顺序返回答案。
+
+**测试样例：**
+
+示例 1：
+
+> 输入：nums = [1,2,3]
+> 输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
+
+示例 2：
+
+> 输入：nums = [0,1]
+> 输出：[[0,1],[1,0]]
+
+示例 3：
+
+> 输入：nums = [1]
+> 输出：[[1]]
+
+**题解：**
+
+
+
+**代码：**
+
+```cpp
+vector<vector<int>> permute(vector<int>& nums) {
+    
+}
+```
 
 ### 广度优先搜索
 
