@@ -1,0 +1,8 @@
+INSERT Y info1
+INSERT A info2
+INSERT CA info3
+INSERT COM info4
+INSERT DS info5
+INSERT CN info6
+INSERT OS info7
+INSERT DP info8
