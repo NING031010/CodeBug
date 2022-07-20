@@ -12,7 +12,7 @@
   --color-8-trans: #75b4d785;
   --color-9: #99CCFF;
 
-  --background-img: url("./ling/duduke.png");
+  --background-img: url("./ling/linghua.png");
 
   --control-text-color: #777;
   --search-select-bg-color: var(--color-8);
@@ -143,7 +143,7 @@ content {
   background-position: 90% bottom;
   background-attachment: fixed;
 
-  margin-top: 20px;
+  margin-top: 30px;
   margin-bottom: 15px;
   padding-left: 8%;
   padding-right: 9%;
@@ -460,7 +460,7 @@ ul li {
 code,
 tt {
   font-family: Consolas, "宋体";
-  border: 1px solid var(--color-4);
+  /* border: 1px solid var(--color-4); */
   background-image: var(--background-img);
   background-size: 20%;
   background-position: 90% bottom;
