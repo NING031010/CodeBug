@@ -1,4 +1,4 @@
-#typora个性化主题
+# typora个性化主题
 
 在githubpro基础上做了外观上的改动。
 
