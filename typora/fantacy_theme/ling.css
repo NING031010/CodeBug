@@ -125,7 +125,9 @@ body {
 }
 
 content {
-  background: var(--color-3);
+  background: url("./ling/bear.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 /* set default mode's selected color */
@@ -135,7 +137,7 @@ content {
 }
 
 #write {
-  background-color: #fff !important;
+  background-color: rgba(250, 254, 255, 0.75) !important;
   width: 85%;
   height: auto;
 
@@ -337,6 +339,12 @@ ul li {
 
 #typora-sidebar {
   color: #404040;
+  background-color: var(--color-main);
+  background-image: url("./ling/hutao.png");
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: 420px;
+  background-size: 120px;
 }
 
 
@@ -460,17 +468,13 @@ ul li {
 code,
 tt {
   font-family: Consolas, "KaiTi";
-  /* border: 1px solid var(--color-4); */
   background-image: var(--background-img);
   background-size: 20%;
   background-position: 90% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-color: var(--color-1-notrans);
-  border-radius: 3px;
-  /*padding-left: 5px;*/
-  padding: 0;
-  padding: 2px 4px 0px 4px;
+  background-color: rgba(225, 255, 255, 0.25);
+  padding: 2px 4px 0px 0px;
   font-size: 0.9rem;
 }
 
@@ -510,7 +514,7 @@ table tr {
 
 table tr:nth-child(2n),
 thead {
-  background-color: var(--color-1);
+  background-color: rgba(225, 255, 255, 0.50);
 }
 
 table th {
