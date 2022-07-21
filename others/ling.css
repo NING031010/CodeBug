@@ -1,4 +1,5 @@
 :root {
+  /*配色*/
   --color-main: #9AC8E2;
   --color-main-semitransparent: #9AC8E280;
   --color-1: #f2f8fb85;
@@ -11,7 +12,7 @@
   --color-8: #75b4d7;
   --color-8-trans: #75b4d785;
   --color-9: #99CCFF;
-
+  /* 背景小人 */
   --background-img: url("./ling/linghua.png");
 
   --control-text-color: #777;
@@ -113,7 +114,7 @@ html {
 }
 
 body {
-  font-family: Consolas, "新宋体", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+  font-family: Consolas, "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   line-height: 1.6rem;
@@ -240,16 +241,16 @@ h6 code {
 }
 
 h1 {
+  font-family: Consolas, "KaiTi";
   text-align: center;
-  font-family: Consolas, "微软雅黑", monospace;
   font-size: 2.25em;
   line-height: 1.2;
   border-bottom: 1px solid #eee;
 }
 
 h2 {
+  font-family: Consolas, "KaiTi";
   text-align: center;
-  font-family: Consolas, "微软雅黑", monospace;
   font-size: 1.75em;
   color: #FF8000;
   line-height: 1.225;
@@ -257,20 +258,19 @@ h2 {
 }
 
 h3 {
-  font-family: Consolas, "微软雅黑", monospace;
+  font-family: Consolas, "KaiTi";
   font-size: 1.5em;
   color: #034EA1;
   line-height: 1.43;
 }
 
 h4 {
-  font-family: Consolas, "微软雅黑", monospace;
+  font-family: Consolas, "KaiTi";
   color: #15AD66;
   font-size: 1.25em;
 }
 
 h5 {
-  font-family: Consolas, "微软雅黑", monospace;
   font-size: 1em;
 }
 
@@ -336,7 +336,6 @@ ul li {
 
 #typora-sidebar {
   color: #404040;
-  font-family: "微软雅黑"
 }
 
 
@@ -459,7 +458,7 @@ ul li {
 .md-fences,
 code,
 tt {
-  font-family: Consolas, "宋体";
+  font-family: Consolas, "KaiTi";
   /* border: 1px solid var(--color-4); */
   background-image: var(--background-img);
   background-size: 20%;
@@ -486,10 +485,10 @@ tt {
 }
 
 blockquote {
+  font-family: Consolas, "KaiTi";
   border-left: 3px solid #40e0d0;
   border-radius: 2px;
   padding: 0 15px;
-  font-size: 0.9rem;
 }
 
 blockquote blockquote {
@@ -497,6 +496,7 @@ blockquote blockquote {
 }
 
 table {
+  font-family: Consolas, "KaiTi";
   padding: 0;
   word-break: initial;
 }
@@ -537,7 +537,6 @@ table tr td:last-child {
 
 /* 粗体 */
 #write strong {
-  font-family: Consolas, "微软雅黑", monospace;
   background-color: #F2F1D7;
 }
 
@@ -564,7 +563,6 @@ table tr td:last-child {
 }
 
 #write mark {
-  font-family: Consolas, "黑体";
   font-weight: bold;
   background-color: aquamarine;
 }
