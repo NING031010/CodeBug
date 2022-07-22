@@ -251,7 +251,15 @@ h2 {
   font-size: 2.25em;
   color: #FF8000;
   line-height: 1.3;
-  border-bottom: 1px solid #eee;
+}
+
+h2:after {
+  content: "";
+  display: block;
+  margin: 0.2em auto 0;
+  width: 10%;
+  height: 2px;
+  border-bottom: 2px solid #FFA500;
 }
 
 h3 {
