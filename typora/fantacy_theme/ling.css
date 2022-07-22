@@ -2,16 +2,11 @@
   /*配色*/
   --color-main: #9AC8E2;
   --color-main-semitransparent: #9AC8E280;
-  --color-1: #f2f8fb85;
-  --color-1-notrans: #f2f8fb;
   --color-3: #d9eaf4;
-  --color-4: #cde4f1;
   --color-5: #c0dded;
   --color-6: #b3d6e9;
   --color-7: #a7cfe6;
   --color-8: #75b4d7;
-  --color-8-trans: #75b4d785;
-  --color-9: #99CCFF;
   /* 背景小人 */
   --background-img: url("./ling/linghua.png");
 
@@ -133,7 +128,7 @@ content {
 /* set default mode's selected color */
 .in-text-selection,
 ::selection {
-  background-color: var(--color-3);
+  background-color: #40e0d0;
 }
 
 #write {
