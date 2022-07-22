@@ -2,7 +2,7 @@
 
 ## 前言
 
-本文主要是对在github.css基础上修改的typora主题ling.css的介绍。
+本文主要是对在github.css基础上修改的typora主题icy-fire.css的介绍。
 
 ## 目录
 
