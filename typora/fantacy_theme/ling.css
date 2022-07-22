@@ -132,7 +132,7 @@ content {
 }
 
 #write {
-  background-color: rgba(250, 254, 255, 0.75) !important;
+  background-color: rgba(250, 254, 255, 0.80) !important;
   width: 85%;
   height: auto;
 
@@ -470,13 +470,13 @@ ul li {
 .md-fences,
 code,
 tt {
-  font-family: Consolas, "KaiTi";
+  font-family: Consolas, "SimSun";
   background-image: var(--background-img);
   background-size: 20%;
   background-position: 95% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-color: rgba(225, 255, 255, 0.25);
+  background-color: rgba(225, 255, 255, 0.20);
   padding: 2px 4px 0px 0px;
   font-size: 0.9rem;
 }
@@ -493,7 +493,7 @@ tt {
 }
 
 blockquote {
-  font-family: Consolas, "KaiTi";
+  font-family: Consolas, "SimSun";
   border-left: 3px solid #40e0d0;
   border-radius: 2px;
   padding: 0 15px;
@@ -517,7 +517,7 @@ table tr {
 
 table tr:nth-child(2n),
 thead {
-  background-color: rgba(199, 237, 204, 0.50);
+  background-color: rgba(199, 237, 204, 0.40);
 }
 
 table th {
@@ -545,7 +545,7 @@ table tr td:last-child {
 
 /* 粗体 */
 #write strong {
-  background-color: #F2F1D7;
+  background-color: rgba(241, 241, 215, 0.80);
 }
 
 /* 斜体 */
@@ -572,7 +572,7 @@ table tr td:last-child {
 
 #write mark {
   font-weight: bold;
-  background-color: aquamarine;
+  background-color: rgba(127, 255, 212, 0.80);
 }
 
 #write del {
