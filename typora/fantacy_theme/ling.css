@@ -138,7 +138,7 @@ content {
 
   background: var(--background-img) no-repeat;
   background-size: 20%;
-  background-position: 95% bottom;
+  background-position: 90% bottom;
   background-attachment: fixed;
 
   margin-top: 30px;
@@ -342,7 +342,7 @@ ul li {
 
 #typora-sidebar {
   color: #000;
-  background-color: var(--color-main);
+  background-color: rgba(241, 241, 215, 0.80);
   background-image: url("./ling/hutao.png");
   background-repeat: no-repeat;
   background-position-x: right;
@@ -471,14 +471,23 @@ ul li {
 code,
 tt {
   font-family: Consolas, "SimSun";
+  border-radius: 5px;
   background-image: var(--background-img);
   background-size: 20%;
-  background-position: 95% bottom;
+  background-position: 90% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: rgba(225, 255, 255, 0.20);
   padding: 2px 4px 0px 0px;
   font-size: 0.9rem;
+}
+
+code {
+  font-family: Consolas, "SimSun";
+  background-color: rgba(225, 255, 255, 0.80);
+  border-radius: 5px;
+  padding: 2px 4px 0px 0px;
+  font-size: 1rem;
 }
 
 .md-fences {
