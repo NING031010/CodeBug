@@ -8,7 +8,7 @@
   --color-7: #a7cfe6;
   --color-8: #75b4d7;
   /* 背景小人 */
-  --background-img: url("./ling/linghua.png");
+  --background-img: url("./icy-fire/linghua.png");
 
   --control-text-color: #777;
   --search-select-bg-color: var(--color-8);
@@ -120,7 +120,7 @@ body {
 }
 
 content {
-  background: url("./ling/bear.jpg");
+  background: url("./icy-fire/bear.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -343,7 +343,7 @@ ul li {
 #typora-sidebar {
   color: #000;
   background-color: rgba(241, 241, 215, 0.80);
-  background-image: url("./ling/hutao.png");
+  background-image: url("./icy-fire/hutao.png");
   background-repeat: no-repeat;
   background-position-x: right;
   background-position-y: bottom;
