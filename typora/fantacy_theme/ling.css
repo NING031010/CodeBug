@@ -143,7 +143,7 @@ content {
 
   background: var(--background-img) no-repeat;
   background-size: 20%;
-  background-position: 90% bottom;
+  background-position: 95% bottom;
   background-attachment: fixed;
 
   margin-top: 30px;
@@ -338,13 +338,13 @@ ul li {
 }
 
 #typora-sidebar {
-  color: #404040;
+  color: #000;
   background-color: var(--color-main);
   background-image: url("./ling/hutao.png");
   background-repeat: no-repeat;
   background-position-x: right;
-  background-position-y: 420px;
-  background-size: 120px;
+  background-position-y: bottom;
+  background-size: 35%;
 }
 
 
@@ -470,7 +470,7 @@ tt {
   font-family: Consolas, "KaiTi";
   background-image: var(--background-img);
   background-size: 20%;
-  background-position: 90% bottom;
+  background-position: 95% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-color: rgba(225, 255, 255, 0.25);
@@ -514,7 +514,7 @@ table tr {
 
 table tr:nth-child(2n),
 thead {
-  background-color: rgba(225, 255, 255, 0.50);
+  background-color: rgba(199, 237, 204, 0.50);
 }
 
 table th {
