@@ -34,7 +34,7 @@
 1. 下载typora(若已有，跳过即可)，下面的github地址给出了破解版
 2. 在github上下载所有文件，地址：[typora—theme](https://github.com/0Ling8/typora_theme)
 3. 打开typora主题文件夹，地址：文件->偏好设置->外观->打开主题文件夹
-4. 将解压后的文件放入
+4. 将解压后的文件icy-fire.css, github_pro.css, 文件夹icy-fire放入
 5. 重启typora，在主题中选择Icy Fire即可
 
 ## 预览
