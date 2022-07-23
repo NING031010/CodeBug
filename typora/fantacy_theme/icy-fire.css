@@ -480,6 +480,7 @@ tt {
   background-color: rgba(225, 255, 255, 0.20);
   padding: 2px 4px 0px 0px;
   font-size: 0.9rem;
+  box-shadow: var(--shadow);
 }
 
 code {
@@ -488,6 +489,7 @@ code {
   border-radius: 5px;
   padding: 2px 4px 0px 0px;
   font-size: 1rem;
+  box-shadow: var(--shadow);
 }
 
 .md-fences {
