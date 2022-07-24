@@ -1,25 +1,34 @@
 :root {
   /*配色*/
-  --color-main: #9AC8E2;
-  --color-main-semitransparent: #9AC8E280;
+  --color-main: #9AC8E2;  
+  --color-1: #40e0d0;   /*引用侧边*/
+  --color-2: rgba(250, 254, 255, 0.80);   /*纸张颜色*/
   --color-3: #d9eaf4;
+  --color-4: #15AD66;   /*四级标题，超链接*/
   --color-5: #c0dded;
   --color-6: #b3d6e9;
   --color-7: #a7cfe6;
   --color-8: #75b4d7;
-  /* 背景小人 */
-  --background-img: url("./icy-fire/linghua.png");
+  --color-9: #FF8000;   /*二级标题*/
+  --color-10: #034EA1;  /*三级标题*/
+  --color-11: rgba(241, 241, 215, 0.80);  /*侧边栏*/
+  --color-12: rgba(225, 255, 255, 0.20);  /*行间代码块*/
+  --color-13: rgba(199, 237, 204, 0.40);   /*表格*/
+  --color-14: rgba(127, 255, 212, 0.80);    /*高亮*/
+  --text-color: rgb(51, 51, 51);
 
-  --control-text-color: #777;
-  --search-select-bg-color: var(--color-8);
+  --background-img: url("./icy-fire/linghua.png"); /*编辑区小背景*/
+  --background-img-2: url("./icy-fire/bear.jpg"); /*编辑区大背景*/
+  --background-img-3: url("./icy-fire/hutao.png");  /*侧边栏背景*/
 
-  --side-bar-bg-color: var(--color-main-semitransparent);
   --window-border: 2px solid var(--color-main);
 
-  --text-color: rgb(51, 51, 51);
-  --shadow: var(--color-5) 0px 5px 10px;
+  --shadow: var(--color-5) 0px 5px 10px;    /*阴影效果*/
 }
 
+
+
+/*自动编号，如不需要，注释掉即可*/
 #write,
 .sidebar-content,
 .md-toc-content {
@@ -94,6 +103,9 @@ h4.md-focus:before {
   font-weight: inherit;
   line-height: inherit;
 }
+/*自动编号*/
+
+
 
 /* 窗口框颜色 */
 header {
@@ -108,6 +120,7 @@ html {
   -webkit-font-smoothing: initial;
 }
 
+/* 主体 */
 body {
   font-family: Consolas, "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
   color: var(--text-color);
@@ -120,7 +133,7 @@ body {
 }
 
 content {
-  background: url("./icy-fire/bear.jpg");
+  background: var(--background-img-2);
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -128,11 +141,12 @@ content {
 /* set default mode's selected color */
 .in-text-selection,
 ::selection {
-  background-color: #40e0d0;
+  background-color: var(--color-1);
 }
 
+/* 写作区 */
 #write {
-  background-color: rgba(250, 254, 255, 0.80) !important;
+  background-color: var(--color-2) !important;
   width: 85%;
   height: auto;
 
@@ -180,19 +194,21 @@ body>*:last-child {
   margin-bottom: 0 !important;
 }
 
+/* 超链接 */
 a {
-  color: #15AD66;
+  color: var(--color-4);
 }
 
 #write a:hover {
   border-bottom: 1px solid var(--color-5);
-  color: #15AD66;
+  color: var(--color-4);
 }
 
 .md-content {
   color: var(--color-7);
 }
 
+/* 各级标题 */
 h1,
 h2,
 h3,
@@ -206,7 +222,6 @@ h6 {
   line-height: 1.4;
   cursor: text;
 }
-
 h1 tt,
 h1 code {
   font-size: inherit !important;
@@ -249,7 +264,7 @@ h2 {
   font-family: 'Times New Roman', "KaiTi", serif;
   text-align: center;
   font-size: 2.25em;
-  color: #FF8000;
+  color: var(--color-9);
   line-height: 1.3;
 }
 
@@ -259,19 +274,19 @@ h2:after {
   margin: 0.2em auto 0;
   width: 10%;
   height: 2px;
-  border-bottom: 2px solid #FFA500;
+  border-bottom: 2px solid var(--color-9);
 }
 
 h3 {
   font-family: 'Times New Roman', "KaiTi", serif;
   font-size: 2.00em;
-  color: #034EA1;
+  color: var(--color-10);
   line-height: 1.4;
 }
 
 h4 {
   font-family: 'Times New Roman', "KaiTi", serif;
-  color: #15AD66;
+  color: var(--color-4);
   font-size: 1.50em;
 }
 
@@ -340,10 +355,11 @@ ul li {
   background: var(--color-main);
 }
 
+/* 侧边栏 */
 #typora-sidebar {
   color: #000;
-  background-color: rgba(241, 241, 215, 0.80);
-  background-image: url("./icy-fire/hutao.png");
+  background-color: var(--color-11);
+  background-image: var(--background-img-3);
   background-repeat: no-repeat;
   background-position-x: right;
   background-position-y: bottom;
@@ -467,6 +483,7 @@ ul li {
   border-top: 1px solid #eef2f2;
 }
 
+/* 行间代码 */
 .md-fences,
 code,
 tt {
@@ -477,12 +494,13 @@ tt {
   background-position: 90% bottom;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  background-color: rgba(225, 255, 255, 0.20);
+  background-color: var(--color-12);
   padding: 2px 4px 0px 0px;
   font-size: 0.9rem;
   box-shadow: var(--shadow);
 }
 
+/* 行内代码 */
 code {
   font-family: Consolas, "SimSun";
   background-color: rgba(225, 255, 255, 0.80);
@@ -499,13 +517,15 @@ code {
   padding-bottom: 6px;
 }
 
+/* 公式块 */
 .mathjax-block {
   box-shadow: 0 2px 2px 0 var(--color-5);
 }
 
+/* 引用块 */
 blockquote {
   font-family: Consolas, "SimSun";
-  border-left: 3px solid #40e0d0;
+  border-left: 3px solid var(--color-1);
   border-radius: 2px;
   padding: 0 15px;
 }
@@ -514,6 +534,7 @@ blockquote blockquote {
   padding-right: 0;
 }
 
+/* 表格 */
 table {
   font-family: Consolas, "KaiTi";
   padding: 0;
@@ -528,7 +549,7 @@ table tr {
 
 table tr:nth-child(2n),
 thead {
-  background-color: rgba(199, 237, 204, 0.40);
+  background-color: var(--color-13);
 }
 
 table th {
@@ -556,7 +577,7 @@ table tr td:last-child {
 
 /* 粗体 */
 #write strong {
-  background-color: rgba(241, 241, 215, 0.80);
+  background-color: var(--color-11);
 }
 
 /* 斜体 */
@@ -580,10 +601,10 @@ table tr td:last-child {
 .md-reset a.md-active {
   background-color: var(--color-3);
 }
-
+/* 高亮 */
 #write mark {
   font-weight: bold;
-  background-color: rgba(127, 255, 212, 0.80);
+  background-color: var(--color-14);
 }
 
 #write del {
